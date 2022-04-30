@@ -156,6 +156,8 @@ def quiz():
                     best_result = get_best_result_from_database(LOGIN)
 
                     insert_results_into_database(best_result < ANSWERED_CORRECTLY * 10, ANSWERED_CORRECTLY, LOGIN)
+                    CURRENT_QUESTION = 0
+                    ANSWERED_CORRECTLY = 0
 
                     return render_template('success.html', result=int(ANSWERED_CORRECTLY / len(questions) * 100))
 
