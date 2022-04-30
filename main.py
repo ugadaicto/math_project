@@ -2,16 +2,79 @@ from flask import Flask, url_for, render_template, redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
+from forms.login_form import LoginForm
+from forms.register_form import RegisterForm
+from forms.quiz_form import QuizForm
 import sqlite3
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'rabotai_pozhaluysta'
 USER_LOGGED_IN = False
+LOGIN = None
+
+
+def password_is_correct(user_name, password):
+    con = sqlite3.connect('profiles.db')
+    cur = con.cursor()
+    result = cur.execute(f"""SELECT password FROM profiles WHERE user_name = '{user_name}'""")
+    result = result.fetchall()
+    if result:
+        return result[0][0] == password
+    return False
+
+
+def make_new_profile(user_name, password):
+    con = sqlite3.connect('profiles.db')
+    cur = con.cursor()
+    cur.execute(
+        f"""INSERT INTO profiles(user_name, password, tasks_solved, tasks_solved_correctly)
+         VALUES('{user_name}', '{password}', 0, 0)""")
+    con.commit()
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    global USER_LOGGED_IN
+    global LOGIN
+    form = LoginForm()
+    if form.validate_on_submit():
+        login, password = form.username._value(), form.password._value()
+
+        if password_is_correct(login, password):
+            USER_LOGGED_IN = True
+            LOGIN = login
+            return render_template('menu.html', user_logged_in=USER_LOGGED_IN)
+
+        else:
+            return render_template('log.html', title='Авторизация', form=form, custom_error="Неверный логин или пароль")
+
+    return render_template('log.html', title='Авторизация', form=form)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    global USER_LOGGED_IN
+    global LOGIN
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user_name, password, password_check = form.username._value(), form.password._value(), form.password_check._value()
+
+        if password != password_check:
+            return render_template('reg.html', title='Регистрация', form=form,
+                                   custom_error="Введнные пароли не сходятся")
+
+        make_new_profile(user_name, password)
+        USER_LOGGED_IN = True
+        LOGIN = user_name
+        return render_template('menu.html', user_logged_in=USER_LOGGED_IN)
+
+    return render_template('reg.html', title='Регистрация', form=form)
 
 
 @app.route('/')
-def image_mars():
+def menu():
+    global USER_LOGGED_IN
     return render_template('menu.html', user_logged_in=USER_LOGGED_IN)
 
 
