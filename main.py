@@ -1,5 +1,4 @@
 import docx
-import random
 from flask import Flask, url_for, render_template, redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
@@ -8,7 +7,7 @@ from forms.login_form import LoginForm
 from forms.register_form import RegisterForm
 from forms.quiz_form import QuizForm
 import sqlite3
-
+import random
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'rabotai_pozhaluysta'
@@ -60,7 +59,6 @@ def get_best_result_from_database(user_name):
     cur = con.cursor()
     best_result = cur.execute(
         f"""SELECT best_result FROM profiles WHERE user_name = '{user_name}'""").fetchall()
-    print(f'best res: {best_result[0][0]}')
     if best_result[0][0]:
         return best_result[0][0]
     return 0
@@ -93,6 +91,12 @@ def lessons(file_name):
     return [c.paragraphs[0].text, v]
 
 
+@app.route('/')
+def menu():
+    global USER_LOGGED_IN
+    global LOGIN
+    return render_template('menu.html', user_logged_in=USER_LOGGED_IN, user_name=LOGIN)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     global USER_LOGGED_IN
@@ -104,7 +108,7 @@ def login():
         if password_is_correct(login, password):
             USER_LOGGED_IN = True
             LOGIN = login
-            return render_template('menu.html', user_logged_in=USER_LOGGED_IN)
+            return render_template('menu.html', user_logged_in=USER_LOGGED_IN, user_name=LOGIN)
 
         else:
             return render_template('log.html', title='Авторизация', form=form, custom_error="Неверный логин или пароль")
@@ -127,7 +131,7 @@ def register():
         make_new_profile(user_name, password)
         USER_LOGGED_IN = True
         LOGIN = user_name
-        return render_template('menu.html', user_logged_in=USER_LOGGED_IN)
+        return render_template('menu.html', user_logged_in=USER_LOGGED_IN, user_name=LOGIN)
 
     return render_template('reg.html', title='Регистрация', form=form)
 
@@ -142,7 +146,6 @@ def quiz():
     if USER_LOGGED_IN:
         form = QuizForm()
         questions = QUESTIONS
-        print(questions)
         question = questions[CURRENT_QUESTION]
         if form.validate_on_submit():
             chosen_answer = None
@@ -154,15 +157,12 @@ def quiz():
 
                     insert_results_into_database(best_result < ANSWERED_CORRECTLY * 10, ANSWERED_CORRECTLY, LOGIN)
 
-                    print(USER_LOGGED_IN)
-                    print(ANSWERED_CORRECTLY, ANSWERED_CORRECTLY / len(questions) * 100)
                     return render_template('success.html', result=int(ANSWERED_CORRECTLY / len(questions) * 100))
 
                 question = questions[CURRENT_QUESTION]
                 return render_template('quiz.html', question=question, form=form)
 
             if form.data["answer1"]:
-                print(CURRENT_QUESTION)
                 chosen_answer = 1
                 response, correct_answer = check_answer(question, 1)
             if form.data["answer2"]:
@@ -177,10 +177,8 @@ def quiz():
 
             if response:
                 ANSWERED_CORRECTLY += 1
-                print(ANSWERED_CORRECTLY)
 
             question = questions[CURRENT_QUESTION]
-            print(question)
 
             return render_template('quiz.html', question=question, form=form,
                                    correct_answer=correct_answer, chosen_answer=chosen_answer, answered=True)
@@ -192,10 +190,12 @@ def quiz():
     return render_template('quiz.html', question=question, form=form)
 
 
-@app.route('/')
-def menu():
-    global USER_LOGGED_IN
-    return render_template('menu.html', user_logged_in=USER_LOGGED_IN)
+@app.route("/profile", methods=['GET', 'POST'])
+def profile():
+    global LOGIN
+    last_result = get_last_result_from_database(LOGIN)
+    best_result = get_best_result_from_database(LOGIN)
+    return render_template('profile.html', user_name=LOGIN, last_result=last_result*10, best_result=best_result*10)
 
 
 @app.route("/lesson_<int:number>/")

@@ -63,3 +63,7 @@ html {
   color: black;
   font-size: 23px;
 }
+
+.question {
+    white-space: pre-line;
+}

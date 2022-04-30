@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/quiz.css')}}">
 <form action="" method="post" novalidate>
     <div class="upper_background">
-    <h1> {{ question }} </h1>
+    <h1 class="question"> {{ question }} </h1>
     {{ form.hidden_tag() }}
     {% if correct_answer and correct_answer == 1 %}
         <p class="middle_text">{{ form.answer1(type="submit", class="choice_green") }}</p>

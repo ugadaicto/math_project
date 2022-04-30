@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Алгебра</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/prof.css')}}">
+</head>
+<body id="main_body" >
+<div id="form_container" class="main_container">
+	<div class='top_text'>
+		<h1 class='h1'>Профиль</h1>
+	</div>
+	<br>
+	<div class='note'>
+		<p>Имя пользвателя: {{ user_name }}</p>
+        <p>Последний результат викторины: {{ last_result }}%</p>
+        <p>Лучший результат викторины: {{ best_result }}%</p>
+	</div>
+	<br>
+	<div class='main_content'>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080"'>Вернуться в главное меню</button>
+	</div>
+    <div class='main_content'>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/quiz"'>Пройти итоговую викторину</button>
+	</div>
+</div>
+</body>
+</html>

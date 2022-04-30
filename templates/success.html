@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/success.css')}}">
+	<title>
+		Тест пройден!
+	</title>
+</head>
+<body>
+	<div class="upper_background">
+		<h1 class="upper_text">
+			Викторина успешно пройдена!
+		</h1>
+		<p class="result">
+			Ваш результат составил {{ result }} процентов
+		</p>
+		<button class="entry" onClick='location.href="http://127.0.0.1:8080/"'>
+			Вернуться на главную
+		</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+html {
+  background-image: url(full_background.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.upper_background {
+  width: 500px;
+  height: auto;
+  background-color: #2bab8b;
+  justify-content: center;
+  margin-top: 330px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: white;
+  text-align: center;
+  -webkit-box-shadow: -16px 15px 18px 1px rgba(51, 146, 93, 0.39);
+  -moz-box-shadow: -16px 15px 18px 1px rgba(51, 146, 93, 0.39);
+  box-shadow: -16px 15px 18px 1px rgba(51, 146, 93, 0.39);
+  border-color: black;
+}
+
+.entry {
+  margin-top: 42px;
+  width: 255px;
+  height: 55px;
+  font-size: 18px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: black;
+  color: white;
+}
+
+.upper_text {
+  margin-top: 30px;
+}
+
+.result {
+  font-size: 20px;
+}

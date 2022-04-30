@@ -13,6 +13,8 @@
 		<p class="top">Выберите тему: </p>
 		{% if not user_logged_in %}
 			<button class="authorization" onClick='location.href="http://127.0.0.1:8080/login"'>Авторизоваться</button>
+		{% else %}
+			<button class="authorization" onClick='location.href="http://127.0.0.1:8080/profile"'> Профиль: {{ user_name }}</button>
 		{% endif %}
 	</div>
 	<div class='main_content'>
@@ -51,11 +53,13 @@
 		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_33/"'>Урок 33. Примеры комбинаторных задач</button>
 		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_34/"'>Урок 34. Перестановки</button>
 		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_35/"'>Урок 35. Размещения</button>
-		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_36/"'>Урок 36. Относительная частота случайного события</button>
-		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_37/"'>Урок 37. Достоверные и невозможные события</button>
-		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_38/"'>Урок 38. Сложение вероятностей</button>
-		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_39/"'>Урок 39. Умножение вероятностей</button>
-		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_40/"'>Урок 40. Повторение по курсу</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_36/"'>Урок 36. Сочетания</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_36/"'>Урок 37. Относительная частота случайного события</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_37/"'>Урок 38. Вероятность равновозможных событий</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_38/"'>Урок 39. Достоверные и невозможные события</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_39/"'>Урок 40. Сложение вероятностей</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_41/"'>Урок 41. Умножение вероятностей</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_42/"'>Урок 42. Повторение по курсу</button>
 		{% if user_logged_in %}
 			<button class="choice" onClick='location.href="http://127.0.0.1:8080/quiz"'>Викторина по итогам курса</button>
 		{% endif %}
