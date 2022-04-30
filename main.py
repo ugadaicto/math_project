@@ -1,3 +1,5 @@
+import docx
+import random
 from flask import Flask, url_for, render_template, redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
@@ -7,13 +9,31 @@ from forms.register_form import RegisterForm
 from forms.quiz_form import QuizForm
 import sqlite3
 
-print('a')
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'rabotai_pozhaluysta'
 USER_LOGGED_IN = False
+CURRENT_QUESTION = 0
+ANSWERED_CORRECTLY = 0
 LOGIN = None
+
+
+def get_questions_from_database():
+    con = sqlite3.connect('quiz.db')
+    cur = con.cursor()
+    questions = [question[0] for question in cur.execute(f"""SELECT question FROM questions""").fetchall()]
+    return questions
+
+
+QUESTIONS = random.choices(get_questions_from_database(), k=10)
+
+
+def check_answer(question, answer):
+    con = sqlite3.connect('quiz.db')
+    cur = con.cursor()
+    correct_answer = cur.execute(f"""SELECT correct_answer FROM questions WHERE question='{question}'""").fetchall()[0][
+        0]
+    return answer == correct_answer, correct_answer
 
 
 def password_is_correct(user_name, password):
@@ -30,8 +50,38 @@ def make_new_profile(user_name, password):
     con = sqlite3.connect('profiles.db')
     cur = con.cursor()
     cur.execute(
-        f"""INSERT INTO profiles(user_name, password, tasks_solved, tasks_solved_correctly)
+        f"""INSERT INTO profiles(user_name, password, last_result, best_result)
          VALUES('{user_name}', '{password}', 0, 0)""")
+    con.commit()
+
+
+def get_best_result_from_database(user_name):
+    con = sqlite3.connect('profiles.db')
+    cur = con.cursor()
+    best_result = cur.execute(
+        f"""SELECT best_result FROM profiles WHERE user_name = '{user_name}'""").fetchall()
+    print(f'best res: {best_result[0][0]}')
+    if best_result[0][0]:
+        return best_result[0][0]
+    return 0
+
+
+def get_last_result_from_database(user_name):
+    con = sqlite3.connect('profiles.db')
+    cur = con.cursor()
+    last_result = cur.execute(
+        f"""SELECT last_result FROM profiles WHERE user_name = '{user_name}'""").fetchall()
+    if last_result[0][0]:
+        return last_result[0][0]
+    return 0
+
+
+def insert_results_into_database(new_best, result, user_name):
+    con = sqlite3.connect('profiles.db')
+    cur = con.cursor()
+    if new_best:
+        cur.execute(f"""UPDATE profiles SET best_result = {result} WHERE user_name = '{user_name}'""")
+    cur.execute(f"""UPDATE profiles SET last_result = {result} WHERE user_name = '{user_name}'""")
     con.commit()
 
 
