@@ -7,6 +7,8 @@ from forms.register_form import RegisterForm
 from forms.quiz_form import QuizForm
 import sqlite3
 
+print('a')
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'rabotai_pozhaluysta'
