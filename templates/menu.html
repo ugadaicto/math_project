@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Алгебра</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body id="main_body" >
+<div id="form_container">
+	<div class='top_text'>
+		<h1 class='h1'>Алгебра</h1>
+		<p class='top'>Курс школьной Алгебры за 9 класс</p>
+		<p class="top">Выберите тему: </p>
+		{% if not user_logged_in %}
+			<button class="authorization" onClick='location.href="http://127.0.0.1:8080/login"'>Авторизоваться</button>
+		{% endif %}
+	</div>
+	<div class='main_content'>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_1"'>Урок 1. Функция. Область определения функции</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_2/"'>Урок 2. Область значения функции</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_3/"'>Урок 3. Свойства функции</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_4/"'>Урок 4. Квадратный трёхчлен и его корни</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_5/"'>Урок 5. Разложение квадратного трёхчлена на множители</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_6/"'>Урок 6. Функция y = aх², её график и свойства</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_7/"'>Урок 7. График функции y = aх² + n</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_8/"'>Урок 8. График функции y = a(x – m)²</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_9/"'>Урок 9. Построение графика квадратичной функции</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_10/"'>Урок 10. Функция y = xⁿ</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_11/"'>Урок 11. Корень n-й степени</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_12/"'>Урок 12. Дробно-линейная функция и её график</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_13/"'>Урок 13. Степень с рациональным показателем</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_14/"'>Урок 14. Целое уравнение и его корни</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_15/"'>Урок 15. Дробные рациональные уравнения</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_16/"'>Урок 16. Решение неравенств второй степени с одной переменной</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_17/"'>Урок 17. Решение неравенств методом интервалов</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_18/"'>Урок 18. Некоторые приёмы решения целых уравнений</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_19/"'>Урок 19. Уравнение с двумя переменными и его график</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_20/"'>Урок 20. Графический способ решения систем уравнений</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_21/"'>Урок 21. Решение систем уравнений второй степени</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_22/"'>Урок 22. Неравенства с двумя переменными</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_23/"'>Урок 23. Системы неравенств с двумя переменными</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_24/"'>Урок 24. Некоторые приёмы решения систем уравнений второй степени с двумя переменными</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_25/"'>Урок 25. Последовательности</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_26/"'>Урок 26. Определение арифметической прогрессии. Формула n-го члена арифметической прогрессии</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_27/"'>Урок 27. Характеристическое свойство арифметической прогрессии</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_28/"'>Урок 28. Формула суммы первых n членов арифметической прогрессии</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_29/"'>Урок 29. Определение геометрической прогрессии. Формула n-го члена геометрической прогрессии</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_30/"'>Урок 30. Свойство геометрической прогрессии</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_31/"'>Урок 31. Формула суммы первых n членов геометрической прогрессии</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_32/"'>Урок 32. Метод математической индукции</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_33/"'>Урок 33. Примеры комбинаторных задач</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_34/"'>Урок 34. Перестановки</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_35/"'>Урок 35. Размещения</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_36/"'>Урок 36. Относительная частота случайного события</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_37/"'>Урок 37. Достоверные и невозможные события</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_38/"'>Урок 38. Сложение вероятностей</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_39/"'>Урок 39. Умножение вероятностей</button>
+		<button class="choice" onClick='location.href="http://127.0.0.1:8080/lesson_40/"'>Урок 40. Повторение по курсу</button>
+		{% if user_logged_in %}
+			<button class="choice" onClick='location.href="http://127.0.0.1:8080/quiz"'>Викторина по итогам курса</button>
+		{% endif %}
+	</div>
+</body>
+</html>

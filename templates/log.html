@@ -1,0 +1,67 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+<!--<title>Алгебра</title>-->
+<!--<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/log.css')}}">-->
+<!--<script type="text/javascript" src="view.js"></script>-->
+<!--</head>-->
+<!--	<body>-->
+<!--		<div class="upper_background">-->
+<!--			<div class="top_text">-->
+<!--				<h1>-->
+<!--					Вход в систему-->
+<!--				</h1>-->
+<!--			</div>-->
+<!--			<div class="middle_text">-->
+<!--				<p>-->
+<!--					Введите логин-->
+<!--				</p>-->
+<!--				<input class="inp" type="text" required />-->
+<!--			</div>-->
+<!--			<div>-->
+<!--				<p>-->
+<!--					Введите пароль-->
+<!--				</p>-->
+<!--				<input class="inp" type="" name="">-->
+<!--			</div>-->
+<!--			<div>-->
+<!--				<button class="entry">Войти</button>-->
+<!--			</div>-->
+<!--			<a class="req" href="">Нет аккаунта? Пройдите быструю регистрацию</a>-->
+<!--		</div>-->
+<!--	</body>-->
+<!--</html>-->
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/log.css')}}">
+<form action="" method="post" novalidate>
+    <div class="upper_background">
+    <h1 class="top_text">Авторизация</h1>
+    {{ form.hidden_tag() }}
+    <p class="middle_text">
+        {{ form.username.label }}<br>
+        {{ form.username(class="inp") }}<br>
+        {% for error in form.username.errors %}
+            <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <p class="middle_text">
+        {{ form.password.label }}<br>
+        {{ form.password(class="inp", type="password") }}<br>
+        {% for error in form.password.errors %}
+            <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    {{ custom_error }}
+    <p class="middle_text">{{ form.submit(type="submit", class="entry") }}</p>
+    <div class="req">
+    <a class="req" href="http://127.0.0.1:8080/register">Нет аккаунта? Пройдите быструю регистрацию</a>
+    </div>
+    </div>
+</form>
+{% endblock %}

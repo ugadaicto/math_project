@@ -1,0 +1,70 @@
+html {
+  background-image: url(full_background.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.upper_background {
+  width: 500px;
+  height: auto;
+  background-color: #2bab8b;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 75px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: white;
+  text-align: center;
+  -webkit-box-shadow: -16px 15px 18px 1px rgba(43, 171, 139, 0.39);
+  -moz-box-shadow: -16px 15px 18px 1px rgba(43, 171, 139, 0.39);
+  box-shadow: -16px 15px 18px 1px rgba(43, 171, 139, 0.39);
+  border-color: black;
+  padding: 2px;
+}
+
+.req {
+  color: black;
+}
+
+.middle_text {
+  margin-top: 20px;
+}
+
+.entry {
+  width: 220px;
+  height: 50px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+}
+
+.inp {
+  width: 300px;
+  height: 42px;
+  border-radius: 17px;
+  border: none;
+  margin-top: 10px;
+}
+
+.top_text {
+  margin-top: 25px;
+  font-size: 42px;
+}
+
+p {
+  font-size: 30px;
+}
+
+.error {
+    font-size: 23px;
+    color: black;
+}
